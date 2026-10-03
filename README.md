@@ -2658,3 +2658,4019 @@ Built with Python, TensorFlow, Keras, OpenCV, and a lot of debugging.
 ⭐ [View the repository](https://github.com/Maganpreet-Singh/VisionGuard-AI)
 
 </div>
+
+
+---
+
+# 🧠 Extended Technical Field Manual
+
+This appendix expands the repository documentation into deeper implementation notes. It is intentionally detailed so the README can serve as a long-form reference for studying, extending, and auditing the project.
+
+## 1. Dataset contract: screw
+
+The dataset contract is the boundary between raw files and every downstream experiment. A stable contract makes failures visible early, keeps training assumptions explicit, and prevents accidental mixing of categories or splits. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 2. Dataset contract: bottle
+
+The dataset contract is the boundary between raw files and every downstream experiment. A stable contract makes failures visible early, keeps training assumptions explicit, and prevents accidental mixing of categories or splits. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 3. Dataset contract: capsule
+
+The dataset contract is the boundary between raw files and every downstream experiment. A stable contract makes failures visible early, keeps training assumptions explicit, and prevents accidental mixing of categories or splits. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 4. Dataset contract: metal_nut
+
+The dataset contract is the boundary between raw files and every downstream experiment. A stable contract makes failures visible early, keeps training assumptions explicit, and prevents accidental mixing of categories or splits. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 5. Dataset contract: hazelnut
+
+The dataset contract is the boundary between raw files and every downstream experiment. A stable contract makes failures visible early, keeps training assumptions explicit, and prevents accidental mixing of categories or splits. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 6. Image normalization: screw
+
+Normalization maps decoded pixel values into the numeric range expected by the reconstruction network. Keeping the transformation consistent across training, validation, threshold calibration, notebooks, scripts, and Streamlit inference is essential. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 7. Image normalization: bottle
+
+Normalization maps decoded pixel values into the numeric range expected by the reconstruction network. Keeping the transformation consistent across training, validation, threshold calibration, notebooks, scripts, and Streamlit inference is essential. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 8. Image normalization: capsule
+
+Normalization maps decoded pixel values into the numeric range expected by the reconstruction network. Keeping the transformation consistent across training, validation, threshold calibration, notebooks, scripts, and Streamlit inference is essential. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 9. Image normalization: metal_nut
+
+Normalization maps decoded pixel values into the numeric range expected by the reconstruction network. Keeping the transformation consistent across training, validation, threshold calibration, notebooks, scripts, and Streamlit inference is essential. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 10. Image normalization: hazelnut
+
+Normalization maps decoded pixel values into the numeric range expected by the reconstruction network. Keeping the transformation consistent across training, validation, threshold calibration, notebooks, scripts, and Streamlit inference is essential. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 11. Reconstruction error: screw
+
+Reconstruction error is the bridge from the autoencoder to anomaly scoring. The project primarily uses mean squared error at the image level while retaining a spatial error map for localization. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 12. Reconstruction error: bottle
+
+Reconstruction error is the bridge from the autoencoder to anomaly scoring. The project primarily uses mean squared error at the image level while retaining a spatial error map for localization. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 13. Reconstruction error: capsule
+
+Reconstruction error is the bridge from the autoencoder to anomaly scoring. The project primarily uses mean squared error at the image level while retaining a spatial error map for localization. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 14. Reconstruction error: metal_nut
+
+Reconstruction error is the bridge from the autoencoder to anomaly scoring. The project primarily uses mean squared error at the image level while retaining a spatial error map for localization. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 15. Reconstruction error: hazelnut
+
+Reconstruction error is the bridge from the autoencoder to anomaly scoring. The project primarily uses mean squared error at the image level while retaining a spatial error map for localization. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 16. Threshold calibration: screw
+
+A threshold is an operating point, not an intrinsic truth about an image. It should be derived from clearly identified normal data and evaluated against a separate set of normal and anomalous examples. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 17. Threshold calibration: bottle
+
+A threshold is an operating point, not an intrinsic truth about an image. It should be derived from clearly identified normal data and evaluated against a separate set of normal and anomalous examples. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 18. Threshold calibration: capsule
+
+A threshold is an operating point, not an intrinsic truth about an image. It should be derived from clearly identified normal data and evaluated against a separate set of normal and anomalous examples. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 19. Threshold calibration: metal_nut
+
+A threshold is an operating point, not an intrinsic truth about an image. It should be derived from clearly identified normal data and evaluated against a separate set of normal and anomalous examples. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 20. Threshold calibration: hazelnut
+
+A threshold is an operating point, not an intrinsic truth about an image. It should be derived from clearly identified normal data and evaluated against a separate set of normal and anomalous examples. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 21. Localization: screw
+
+Localization preserves spatial information that disappears when a full image is reduced to one scalar score. The error map can be thresholded and cleaned to obtain candidate defect regions. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 22. Localization: bottle
+
+Localization preserves spatial information that disappears when a full image is reduced to one scalar score. The error map can be thresholded and cleaned to obtain candidate defect regions. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 23. Localization: capsule
+
+Localization preserves spatial information that disappears when a full image is reduced to one scalar score. The error map can be thresholded and cleaned to obtain candidate defect regions. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 24. Localization: metal_nut
+
+Localization preserves spatial information that disappears when a full image is reduced to one scalar score. The error map can be thresholded and cleaned to obtain candidate defect regions. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 25. Localization: hazelnut
+
+Localization preserves spatial information that disappears when a full image is reduced to one scalar score. The error map can be thresholded and cleaned to obtain candidate defect regions. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 26. Evaluation: screw
+
+Evaluation converts a visually convincing prototype into an evidence-backed experiment. Image-level and pixel-level metrics answer different questions and should not be conflated. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 27. Evaluation: bottle
+
+Evaluation converts a visually convincing prototype into an evidence-backed experiment. Image-level and pixel-level metrics answer different questions and should not be conflated. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 28. Evaluation: capsule
+
+Evaluation converts a visually convincing prototype into an evidence-backed experiment. Image-level and pixel-level metrics answer different questions and should not be conflated. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 29. Evaluation: metal_nut
+
+Evaluation converts a visually convincing prototype into an evidence-backed experiment. Image-level and pixel-level metrics answer different questions and should not be conflated. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 30. Evaluation: hazelnut
+
+Evaluation converts a visually convincing prototype into an evidence-backed experiment. Image-level and pixel-level metrics answer different questions and should not be conflated. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 31. Deployment: screw
+
+Deployment adds constraints that notebooks can ignore: startup time, artifact discovery, missing files, model compatibility, malformed inputs, user feedback, and repeatable output handling. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 32. Deployment: bottle
+
+Deployment adds constraints that notebooks can ignore: startup time, artifact discovery, missing files, model compatibility, malformed inputs, user feedback, and repeatable output handling. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 33. Deployment: capsule
+
+Deployment adds constraints that notebooks can ignore: startup time, artifact discovery, missing files, model compatibility, malformed inputs, user feedback, and repeatable output handling. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 34. Deployment: metal_nut
+
+Deployment adds constraints that notebooks can ignore: startup time, artifact discovery, missing files, model compatibility, malformed inputs, user feedback, and repeatable output handling. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 35. Deployment: hazelnut
+
+Deployment adds constraints that notebooks can ignore: startup time, artifact discovery, missing files, model compatibility, malformed inputs, user feedback, and repeatable output handling. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 36. Reproducibility: screw
+
+Reproducibility is the ability to recreate an experiment with the same assumptions. Seeds help, but the full contract also includes package versions, data version, split logic, model files, thresholds, and evaluation definitions. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 37. Reproducibility: bottle
+
+Reproducibility is the ability to recreate an experiment with the same assumptions. Seeds help, but the full contract also includes package versions, data version, split logic, model files, thresholds, and evaluation definitions. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 38. Reproducibility: capsule
+
+Reproducibility is the ability to recreate an experiment with the same assumptions. Seeds help, but the full contract also includes package versions, data version, split logic, model files, thresholds, and evaluation definitions. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 39. Reproducibility: metal_nut
+
+Reproducibility is the ability to recreate an experiment with the same assumptions. Seeds help, but the full contract also includes package versions, data version, split logic, model files, thresholds, and evaluation definitions. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 40. Reproducibility: hazelnut
+
+Reproducibility is the ability to recreate an experiment with the same assumptions. Seeds help, but the full contract also includes package versions, data version, split logic, model files, thresholds, and evaluation definitions. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 41. Error analysis: screw
+
+Error analysis is where false positives and false negatives become actionable engineering information. Instead of hiding mistakes, inspect their shared visual and pipeline characteristics. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 42. Error analysis: bottle
+
+Error analysis is where false positives and false negatives become actionable engineering information. Instead of hiding mistakes, inspect their shared visual and pipeline characteristics. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 43. Error analysis: capsule
+
+Error analysis is where false positives and false negatives become actionable engineering information. Instead of hiding mistakes, inspect their shared visual and pipeline characteristics. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 44. Error analysis: metal_nut
+
+Error analysis is where false positives and false negatives become actionable engineering information. Instead of hiding mistakes, inspect their shared visual and pipeline characteristics. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The safest pattern is to fail loudly when a required artifact is missing, and to return an explicit unknown state when a decision cannot be supported by a reliable threshold or compatible model. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 45. Error analysis: hazelnut
+
+Error analysis is where false positives and false negatives become actionable engineering information. Instead of hiding mistakes, inspect their shared visual and pipeline characteristics. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Visual inspection of representative examples remains valuable even when quantitative metrics exist. Images reveal clipping, misalignment, over-smoothing, localization leakage, and other issues that a single aggregate metric can conceal. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 46. Engineering hygiene: screw
+
+Engineering hygiene keeps a research repository understandable. Explicit paths, clear logs, dependency cleanup, safe artifact handling, and honest status reporting matter as much as model code. Applied specifically to **screw**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. The repository should evolve by controlled experiments: change one important assumption, record the configuration, rerun the relevant evaluation, compare the result, and preserve the evidence. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together.
+
+### Operational checklist
+
+- Confirm that the screw directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for screw.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to screw and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For screw, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for screw under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 47. Engineering hygiene: bottle
+
+Engineering hygiene keeps a research repository understandable. Explicit paths, clear logs, dependency cleanup, safe artifact handling, and honest status reporting matter as much as model code. Applied specifically to **bottle**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. A portfolio-quality machine-learning repository becomes much stronger when the documentation distinguishes current implementation, intended workflow, experimental ideas, and future work rather than blending them together. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used.
+
+### Operational checklist
+
+- Confirm that the bottle directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for bottle.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to bottle and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For bottle, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for bottle under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 48. Engineering hygiene: capsule
+
+Engineering hygiene keeps a research repository understandable. Explicit paths, clear logs, dependency cleanup, safe artifact handling, and honest status reporting matter as much as model code. Applied specifically to **capsule**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Category-specific behavior deserves its own analysis because five classes can have very different texture, geometry, background, and defect distributions even when the same model family is used. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol.
+
+### Operational checklist
+
+- Confirm that the capsule directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for capsule.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to capsule and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For capsule, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for capsule under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 49. Engineering hygiene: metal_nut
+
+Engineering hygiene keeps a research repository understandable. Explicit paths, clear logs, dependency cleanup, safe artifact handling, and honest status reporting matter as much as model code. Applied specifically to **metal_nut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Thresholds and localization masks should be versioned conceptually even when the repository does not yet have a formal experiment tracker. A threshold file without provenance is much less useful than a threshold tied to a documented calibration protocol. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference.
+
+### Operational checklist
+
+- Confirm that the metal_nut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for metal_nut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to metal_nut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For metal_nut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. For industrial inspection, small implementation details can change the decision boundary. Resize filters, normalization ranges, category routing, threshold provenance, and artifact selection should therefore be documented alongside the high-level method.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for metal_nut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+## 50. Engineering hygiene: hazelnut
+
+Engineering hygiene keeps a research repository understandable. Explicit paths, clear logs, dependency cleanup, safe artifact handling, and honest status reporting matter as much as model code. Applied specifically to **hazelnut**, this means the workflow should preserve the distinction between category-specific normality and generic visual similarity. Deployment should never be allowed to silently fall back from a missing trained artifact to an arbitrary model. The current scripts deliberately search for compatible category models and validate the input/output contract before inference. The practical question is not whether this stage sounds sophisticated; it is whether its inputs, outputs, assumptions, and failure modes are visible enough that another engineer can reproduce the reasoning.
+
+### Operational checklist
+
+- Confirm that the hazelnut directory exists and represents the intended dataset version.
+- Confirm that training uses the expected normal-image path for hazelnut.
+- Confirm that preprocessing produces RGB tensors with the documented shape.
+- Confirm that the selected model belongs to hazelnut and passes the model contract.
+- Confirm that thresholds are sourced from a documented calibration procedure.
+- Confirm that outputs are written to the intended artifact directory.
+- Confirm that evaluation results identify the category, sample count, and metric definition.
+
+### Interpretation notes
+
+For hazelnut, the anomaly signal should be interpreted relative to the normal visual distribution learned by the category-specific autoencoder. A higher reconstruction error is evidence of reconstruction disagreement, not by itself a proof of manufacturing failure. A localized error region is a candidate inspection area, not automatically a verified defect. A robust workflow treats every generated score as conditional on the pipeline that produced it. Change the image size, preprocessing, checkpoint, calibration set, or metric definition and the meaning of the resulting number can change.
+
+### Research angle
+
+A useful experiment is to compare the baseline behavior for hazelnut under controlled changes to one variable at a time: image resolution, calibration percentile, augmentation policy, latent capacity, reconstruction loss, or post-processing threshold. Keep the test protocol fixed so that differences can be attributed to the changed factor rather than to a hidden dataset or evaluation change.
+
+
+
+# 🔭 Extended Research Playbook
+
+The strongest way to extend VisionGuard AI is to turn every future improvement into a measurable hypothesis. Examples include: increasing image resolution may improve tiny-defect sensitivity but raise compute cost; a richer latent representation may improve reconstruction of normal geometry but risk reconstructing defects too faithfully; a stricter threshold may reduce false negatives at the expense of false positives; stronger localization post-processing may remove noise but also erase small real defects. Each hypothesis should be tested under a controlled protocol with the same category split, comparable calibration strategy, and explicitly recorded model artifact.
+
+## Suggested experiment record
+
+```text
+experiment_id
+category
+dataset_version
+model_version
+image_size
+batch_size
+epochs
+learning_rate
+augmentation_policy
+loss_function
+threshold_method
+threshold_value
+pixel_threshold_method
+pixel_threshold_value
+evaluation_set
+image_count
+accuracy
+precision
+recall
+f1
+roc_auc
+iou
+dice
+false_positive_examples
+false_negative_examples
+notes
+```
+
+## Review questions
+
+1. Did the data pipeline use only the intended category and split?
+2. Was the threshold calibrated without leaking final test labels?
+3. Was the model artifact compatible with the inference contract?
+4. Were the displayed metrics computed on the same population described in the report?
+5. Do qualitative examples support the quantitative conclusions?
+6. Are failures documented rather than removed from the narrative?
+7. Could another engineer reconstruct the experiment from the repository alone?
+
+## Final engineering principle
+
+The goal is not to make the README look enormous. The goal is to make the project legible. Every important assumption should have a place where it can be inspected, challenged, and improved. That is the difference between a demo and a serious machine-learning repository.
+
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
+
+> The repository should continue to prefer measured results over attractive but unsupported claims.
+
+> This note reinforces the same implementation contract for maintainability, reproducibility, and careful evaluation.
+
+> Keep the category boundary explicit, keep the preprocessing path consistent, and keep the evidence attached to the decision.
+
+> When behavior changes, record the changed assumption rather than relying on memory or an undocumented notebook state.
+
+> A stable artifact pipeline makes debugging faster because each failure can be localized to data, preprocessing, model loading, calibration, inference, localization, or evaluation.
