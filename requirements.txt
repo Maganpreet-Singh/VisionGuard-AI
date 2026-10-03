@@ -1,26 +1,9 @@
-<<<<<<< HEAD
-tensorflow
+streamlit
+tensorflow==2.21.0
 numpy
 pandas
 matplotlib
-seaborn
 plotly
 scikit-learn
 Pillow
-opencv-python
-kagglehub
-jupyter
-=======
-tensorflow
-numpy
-pandas
-matplotlib
-seaborn
-plotly
-scikit-learn
-Pillow
-opencv-python
-kagglehub
-jupyter
->>>>>>> b18246d (Add project files)
-ipykernel
+opencv-python-headless
