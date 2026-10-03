@@ -1,0 +1,11 @@
+Category,Example,Defect Type,File,IoU,Dice
+screw,Highest IoU,manipulated_front,000.png,0.0,0.0
+screw,Lowest IoU,manipulated_front,000.png,0.0,0.0
+bottle,Highest IoU,broken_large,000.png,0.0,0.0
+bottle,Lowest IoU,broken_large,000.png,0.0,0.0
+capsule,Highest IoU,squeeze,001.png,0.005861664712778429,0.011655011655011656
+capsule,Lowest IoU,crack,000.png,0.0,0.0
+metal_nut,Highest IoU,flip,004.png,0.009438775510204082,0.018701036138488752
+metal_nut,Lowest IoU,bent,000.png,0.0,0.0
+hazelnut,Highest IoU,print,008.png,0.7313131313131314,0.8448074679113186
+hazelnut,Lowest IoU,crack,003.png,0.0,0.0

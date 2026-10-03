@@ -1,0 +1,11 @@
+Category,Error Type,Count
+screw,False Positive,27
+screw,False Negative,113
+bottle,False Positive,0
+bottle,False Negative,61
+capsule,False Positive,0
+capsule,False Negative,107
+metal_nut,False Positive,0
+metal_nut,False Negative,93
+hazelnut,False Positive,0
+hazelnut,False Negative,61

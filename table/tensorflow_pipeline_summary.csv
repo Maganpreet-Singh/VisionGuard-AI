@@ -1,0 +1,4 @@
+Dataset,Images,Batch Size,Batches,Shuffle,Augmentation,Cache,Prefetch
+Train,1087,32,34,True,True,False,AUTOTUNE
+Validation,272,32,9,False,False,False,AUTOTUNE
+Test,600,32,19,False,False,False,AUTOTUNE

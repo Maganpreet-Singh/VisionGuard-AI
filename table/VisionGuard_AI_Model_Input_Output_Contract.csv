@@ -1,0 +1,6 @@
+Category,Input Shape,Output Shape,Parameters,Shape Valid
+screw,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True
+bottle,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True
+capsule,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True
+metal_nut,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True
+hazelnut,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True

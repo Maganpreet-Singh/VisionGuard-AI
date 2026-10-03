@@ -1,0 +1,11 @@
+Category,Split,Images
+screw,Train,288
+screw,Validation,32
+bottle,Train,188
+bottle,Validation,21
+capsule,Train,197
+capsule,Validation,22
+metal_nut,Train,198
+metal_nut,Validation,22
+hazelnut,Train,351
+hazelnut,Validation,40

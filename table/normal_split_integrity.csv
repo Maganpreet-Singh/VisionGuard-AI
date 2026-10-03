@@ -1,0 +1,6 @@
+Category,Train Images,Validation Images,Filename Overlap,Split Disjoint
+screw,288,32,0,True
+bottle,188,21,0,True
+capsule,197,22,0,True
+metal_nut,198,22,0,True
+hazelnut,351,40,0,True

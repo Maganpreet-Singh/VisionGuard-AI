@@ -1,0 +1,6 @@
+Category,Defect Types
+screw,"good, manipulated_front, scratch_head, scratch_neck, thread_side, thread_top"
+bottle,"broken_large, broken_small, contamination, good"
+capsule,"crack, faulty_imprint, good, poke, scratch, squeeze"
+metal_nut,"bent, color, flip, good, scratch"
+hazelnut,"crack, cut, good, hole, print"

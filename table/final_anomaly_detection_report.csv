@@ -1,0 +1,2 @@
+Categories Evaluated,Test Images Evaluated,Total False Positives,Total False Negatives,Mean Accuracy,Mean Precision,Mean Recall,Mean F1-Score,Mean ROC-AUC,Mean PR-AUC,Normalized Pooled ROC-AUC,Normalized Pooled PR-AUC,Visualizations,CSV Reports
+5,600,27,435,0.24324261472768544,0.6363636363636364,0.04581725044757964,0.0808739934522746,0.39725273261033467,0.7410740077042635,0.4513004646671896,0.6941125753168832,256,199

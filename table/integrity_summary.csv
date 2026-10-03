@@ -1,0 +1,16 @@
+Category,Split,Images,Valid,Invalid,Validity (%)
+bottle,ground_truth,63,63,0,100.0
+bottle,test,83,83,0,100.0
+bottle,train,209,209,0,100.0
+capsule,ground_truth,109,109,0,100.0
+capsule,test,132,132,0,100.0
+capsule,train,219,219,0,100.0
+hazelnut,ground_truth,70,70,0,100.0
+hazelnut,test,110,110,0,100.0
+hazelnut,train,391,391,0,100.0
+metal_nut,ground_truth,93,93,0,100.0
+metal_nut,test,115,115,0,100.0
+metal_nut,train,220,220,0,100.0
+screw,ground_truth,119,119,0,100.0
+screw,test,160,160,0,100.0
+screw,train,320,320,0,100.0

@@ -1,0 +1,6 @@
+Category,Category Exists,Train Exists,Train Good Exists,Test Exists,Ground Truth Exists,Normal Images
+screw,True,True,True,True,True,320
+bottle,True,True,True,True,True,209
+capsule,True,True,True,True,True,219
+metal_nut,True,True,True,True,True,220
+hazelnut,True,True,True,True,True,391

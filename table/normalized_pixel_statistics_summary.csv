@@ -1,0 +1,6 @@
+Category,Samples,Mean Pixel,Average Pixel Std,Minimum Pixel,Maximum Pixel
+bottle,40,0.53992,0.35972,0.11373,1.0
+capsule,40,0.6711,0.25196,0.04706,0.97255
+hazelnut,40,0.19423,0.10732,0.07451,1.0
+metal_nut,40,0.23417,0.16529,0.05882,1.0
+screw,40,0.72264,0.1321,0.11373,0.90588

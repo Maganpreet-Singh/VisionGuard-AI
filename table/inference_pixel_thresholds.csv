@@ -1,0 +1,6 @@
+Category,Pixel Threshold,Method
+screw,0.5401692390441895,Normal calibration P99.5
+bottle,0.5674858689308167,Normal calibration P99.5
+capsule,0.5813256502151489,Normal calibration P99.5
+metal_nut,0.3287554979324341,Normal calibration P99.5
+hazelnut,0.18707428872585297,Normal calibration P99.5

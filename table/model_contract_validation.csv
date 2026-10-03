@@ -1,0 +1,6 @@
+Category,Expected Shape,Input Shape,Output Shape,Input Valid,Output Valid
+screw,"(128, 128, 3)","(128, 128, 3)","(128, 128, 3)",True,True
+bottle,"(128, 128, 3)","(128, 128, 3)","(128, 128, 3)",True,True
+capsule,"(128, 128, 3)","(128, 128, 3)","(128, 128, 3)",True,True
+metal_nut,"(128, 128, 3)","(128, 128, 3)","(128, 128, 3)",True,True
+hazelnut,"(128, 128, 3)","(128, 128, 3)","(128, 128, 3)",True,True

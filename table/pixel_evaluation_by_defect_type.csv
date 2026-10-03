@@ -1,0 +1,22 @@
+Category,Defect Type,Images,Mean IoU,Mean Dice,Mean Pixel Recall
+bottle,broken_large,20,0.0,0.0,0.0
+bottle,broken_small,22,0.0,0.0,0.0
+bottle,contamination,21,0.0,0.0,0.0
+capsule,crack,23,0.0,0.0,0.0
+capsule,faulty_imprint,22,0.0,0.0,0.0
+capsule,poke,21,0.0,0.0,0.0
+capsule,scratch,23,0.0,0.0,0.0
+capsule,squeeze,20,0.00029308323563892143,0.0005827505827505828,0.00030193236714975844
+hazelnut,crack,18,0.05256913595795605,0.09483153347325236,0.053045714483012235
+hazelnut,cut,17,0.0646783233075087,0.10632940461795967,0.0700020185002035
+hazelnut,hole,18,0.06152184714897213,0.10102566482544284,0.06209410289401776
+hazelnut,print,17,0.3340927918400778,0.47296556857245386,0.34758746698128284
+metal_nut,bent,25,0.0,0.0,0.0
+metal_nut,color,22,0.0,0.0,0.0
+metal_nut,flip,23,0.0009617730483912253,0.0019127010504077218,0.0009617730483912253
+metal_nut,scratch,23,0.0,0.0,0.0
+screw,manipulated_front,24,0.0,0.0,0.0
+screw,scratch_head,24,0.0,0.0,0.0
+screw,scratch_neck,25,0.0,0.0,0.0
+screw,thread_side,23,0.0,0.0,0.0
+screw,thread_top,23,0.0,0.0,0.0

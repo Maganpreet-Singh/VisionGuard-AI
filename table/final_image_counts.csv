@@ -1,0 +1,16 @@
+Category,Component,Images
+screw,Train Images,320
+bottle,Train Images,209
+capsule,Train Images,219
+metal_nut,Train Images,220
+hazelnut,Train Images,391
+screw,Test Images,160
+bottle,Test Images,83
+capsule,Test Images,132
+metal_nut,Test Images,115
+hazelnut,Test Images,110
+screw,Ground Truth Masks,119
+bottle,Ground Truth Masks,63
+capsule,Ground Truth Masks,109
+metal_nut,Ground Truth Masks,93
+hazelnut,Ground Truth Masks,70

@@ -1,0 +1,6 @@
+Category,Defective_Images,Ground_Truth_Matched,Match Rate
+bottle,63,63,1.0
+capsule,109,109,1.0
+hazelnut,70,70,1.0
+metal_nut,93,93,1.0
+screw,119,119,1.0

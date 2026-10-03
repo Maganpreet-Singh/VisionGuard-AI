@@ -1,0 +1,11 @@
+Category,Split,Samples,Average Width,Average Height,Minimum Width,Maximum Width,Minimum Height,Maximum Height,Preprocessed Width,Preprocessed Height
+bottle,test,39,900.0,900.0,900,900,900,900,224,224
+bottle,train,89,900.0,900.0,900,900,900,900,224,224
+capsule,test,67,1000.0,1000.0,1000,1000,1000,1000,224,224
+capsule,train,120,1000.0,1000.0,1000,1000,1000,1000,224,224
+hazelnut,test,59,1024.0,1024.0,1024,1024,1024,1024,224,224
+hazelnut,train,211,1024.0,1024.0,1024,1024,1024,1024,224,224
+metal_nut,test,55,700.0,700.0,700,700,700,700,224,224
+metal_nut,train,104,700.0,700.0,700,700,700,700,224,224
+screw,test,91,1024.0,1024.0,1024,1024,1024,1024,224,224
+screw,train,165,1024.0,1024.0,1024,1024,1024,1024,224,224

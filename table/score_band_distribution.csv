@@ -1,0 +1,13 @@
+Category,Score Band,Images
+bottle,Borderline Anomaly,2
+bottle,Borderline Normal,81
+capsule,Borderline Anomaly,2
+capsule,Borderline Normal,130
+hazelnut,Borderline Anomaly,9
+hazelnut,Borderline Normal,11
+hazelnut,Low,90
+metal_nut,Borderline Normal,8
+metal_nut,Low,107
+screw,Borderline Anomaly,33
+screw,Borderline Normal,121
+screw,Low,6

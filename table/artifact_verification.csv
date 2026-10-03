@@ -1,0 +1,31 @@
+Category,Artifact,Exists
+screw,Best Model,True
+screw,Final Model,True
+screw,Best Weights,True
+screw,Training History,True
+screw,Training Loss PNG,True
+screw,Training Loss HTML,True
+bottle,Best Model,True
+bottle,Final Model,True
+bottle,Best Weights,True
+bottle,Training History,True
+bottle,Training Loss PNG,True
+bottle,Training Loss HTML,True
+capsule,Best Model,True
+capsule,Final Model,True
+capsule,Best Weights,True
+capsule,Training History,True
+capsule,Training Loss PNG,True
+capsule,Training Loss HTML,True
+metal_nut,Best Model,True
+metal_nut,Final Model,True
+metal_nut,Best Weights,True
+metal_nut,Training History,True
+metal_nut,Training Loss PNG,True
+metal_nut,Training Loss HTML,True
+hazelnut,Best Model,True
+hazelnut,Final Model,True
+hazelnut,Best Weights,True
+hazelnut,Training History,True
+hazelnut,Training Loss PNG,True
+hazelnut,Training Loss HTML,True

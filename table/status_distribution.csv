@@ -1,0 +1,11 @@
+Category,Status,Test Images
+bottle,Defective,63
+bottle,Good,20
+capsule,Defective,109
+capsule,Good,23
+hazelnut,Defective,70
+hazelnut,Good,40
+metal_nut,Defective,93
+metal_nut,Good,22
+screw,Defective,119
+screw,Good,41

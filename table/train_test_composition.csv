@@ -1,0 +1,11 @@
+Category,Split,Images
+screw,Train Images,320
+bottle,Train Images,209
+capsule,Train Images,219
+metal_nut,Train Images,220
+hazelnut,Train Images,391
+screw,Test Images,160
+bottle,Test Images,83
+capsule,Test Images,132
+metal_nut,Test Images,115
+hazelnut,Test Images,110

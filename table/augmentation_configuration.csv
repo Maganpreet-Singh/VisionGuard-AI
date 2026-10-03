@@ -1,0 +1,5 @@
+Transform,Configuration,Seed
+Random Flip,Horizontal + Vertical,42
+Random Rotation,Factor = 0.05,42
+Random Zoom,Width factor = 0.08,42
+Random Contrast,Factor = 0.10,42

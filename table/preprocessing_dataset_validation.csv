@@ -1,0 +1,6 @@
+Category,Category Exists,Train Exists,Test Exists,Ground Truth Exists,Train Images,Test Images,Ground Truth Masks,Defect Types
+screw,True,True,True,True,320,160,119,"good, manipulated_front, scratch_head, scratch_neck, thread_side, thread_top"
+bottle,True,True,True,True,209,83,63,"broken_large, broken_small, contamination, good"
+capsule,True,True,True,True,219,132,109,"crack, faulty_imprint, good, poke, scratch, squeeze"
+metal_nut,True,True,True,True,220,115,93,"bent, color, flip, good, scratch"
+hazelnut,True,True,True,True,391,110,70,"crack, cut, good, hole, print"

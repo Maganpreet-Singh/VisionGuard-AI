@@ -1,0 +1,6 @@
+Category,Defect Type,Ground Truth Available
+screw,manipulated_front,True
+bottle,broken_large,True
+capsule,crack,True
+metal_nut,bent,True
+hazelnut,crack,True

@@ -1,0 +1,21 @@
+Category,Threshold Method,Changed Decisions,Total Images,Changed Decision Rate
+screw,P95,3,160,0.01875
+screw,P99,0,160,0.0
+screw,Mean + 3Std,29,160,0.18125
+screw,IQR Fence,29,160,0.18125
+bottle,P95,0,83,0.0
+bottle,P99,0,83,0.0
+bottle,Mean + 3Std,2,83,0.0240963855421686
+bottle,IQR Fence,2,83,0.0240963855421686
+capsule,P95,0,132,0.0
+capsule,P99,0,132,0.0
+capsule,Mean + 3Std,2,132,0.0151515151515151
+capsule,IQR Fence,0,132,0.0
+metal_nut,P95,0,115,0.0
+metal_nut,P99,0,115,0.0
+metal_nut,Mean + 3Std,0,115,0.0
+metal_nut,IQR Fence,2,115,0.017391304347826
+hazelnut,P95,2,110,0.0181818181818181
+hazelnut,P99,0,110,0.0
+hazelnut,Mean + 3Std,0,110,0.0
+hazelnut,IQR Fence,10,110,0.0909090909090909

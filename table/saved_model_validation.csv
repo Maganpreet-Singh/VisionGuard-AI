@@ -1,0 +1,6 @@
+Category,Input Shape,Output Shape,Parameters,Best Model,Final Model,Best Weights,Inference Passed
+screw,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True,True,True,True
+bottle,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True,True,True,True
+capsule,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True,True,True,True
+metal_nut,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True,True,True,True
+hazelnut,"(None, 128, 128, 3)","(None, 128, 128, 3)",778371,True,True,True,True

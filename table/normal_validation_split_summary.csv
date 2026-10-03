@@ -1,0 +1,11 @@
+Category,Split,Images
+screw,Normal Train,288
+screw,Normal Validation,32
+bottle,Normal Train,188
+bottle,Normal Validation,21
+capsule,Normal Train,197
+capsule,Normal Validation,22
+metal_nut,Normal Train,198
+metal_nut,Normal Validation,22
+hazelnut,Normal Train,351
+hazelnut,Normal Validation,40

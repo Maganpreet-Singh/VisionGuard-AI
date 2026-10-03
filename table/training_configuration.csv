@@ -1,0 +1,10 @@
+Parameter,Value
+Image Height,128
+Image Width,128
+Image Channels,3
+Batch Size,32
+Epochs,50
+Validation Size,0.1
+Learning Rate,0.001
+Random Seed,42
+Categories,"screw, bottle, capsule, metal_nut, hazelnut"

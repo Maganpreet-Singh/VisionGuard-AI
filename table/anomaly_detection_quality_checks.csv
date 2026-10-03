@@ -1,0 +1,11 @@
+Check,Passed,Status
+At least one category loaded,True,PASS
+Thresholds available,True,PASS
+Test results available,True,PASS
+All reconstruction errors finite,True,PASS
+All thresholds finite,True,PASS
+Predictions are binary,True,PASS
+Category metrics generated,True,PASS
+ROC analysis generated or not applicable,True,PASS
+CSV audit passed,False,REVIEW
+Visualizations generated,True,PASS

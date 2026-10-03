@@ -1,0 +1,11 @@
+Category,Split,Samples,Average Aspect Ratio,Minimum Aspect Ratio,Maximum Aspect Ratio
+bottle,test,39,1.0,1.0,1.0
+bottle,train,89,1.0,1.0,1.0
+capsule,test,67,1.0,1.0,1.0
+capsule,train,120,1.0,1.0,1.0
+hazelnut,test,59,1.0,1.0,1.0
+hazelnut,train,211,1.0,1.0,1.0
+metal_nut,test,55,1.0,1.0,1.0
+metal_nut,train,104,1.0,1.0,1.0
+screw,test,91,1.0,1.0,1.0
+screw,train,165,1.0,1.0,1.0

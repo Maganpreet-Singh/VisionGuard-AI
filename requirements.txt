@@ -1,0 +1,26 @@
+<<<<<<< HEAD
+tensorflow
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+scikit-learn
+Pillow
+opencv-python
+kagglehub
+jupyter
+=======
+tensorflow
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+scikit-learn
+Pillow
+opencv-python
+kagglehub
+jupyter
+>>>>>>> b18246d (Add project files)
+ipykernel

@@ -1,0 +1,6 @@
+Category,Exists,Train,Test,Ground Truth
+screw,True,True,True,True
+bottle,True,True,True,True
+capsule,True,True,True,True
+metal_nut,True,True,True,True
+hazelnut,True,True,True,True

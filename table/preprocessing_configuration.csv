@@ -1,0 +1,13 @@
+Parameter,Value
+Image Height,224
+Image Width,224
+Batch Size,32
+Validation Split,0.2
+Random Seed,42
+Cache Datasets,False
+Image Range,"[0, 1]"
+Image Interpolation,Bilinear
+Mask Interpolation,Nearest
+Mask Output,"Binary {0, 1}"
+Training Augmentation,Random Flip + Random Rotation + Random Zoom
+Prefetch,tf.data.AUTOTUNE

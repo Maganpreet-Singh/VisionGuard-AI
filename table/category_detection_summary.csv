@@ -1,0 +1,6 @@
+Category,Test Images,Normal Images,Defective Images,Predicted Normal,Predicted Anomaly,Detected Anomalies,False Positives,False Negatives
+screw,160,41,119,124,36,6,30,113
+bottle,83,20,63,81,2,2,0,61
+capsule,132,23,109,130,2,2,0,107
+metal_nut,115,22,93,115,0,0,0,93
+hazelnut,110,40,70,101,9,9,0,61

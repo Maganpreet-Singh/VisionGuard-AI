@@ -1,0 +1,6 @@
+Category,Threshold,Method
+screw,0.0247877840138971,Precomputed artifact
+bottle,0.1075413331389427,Precomputed artifact
+capsule,0.0663820374011993,Precomputed artifact
+metal_nut,0.0263522500544786,Precomputed artifact
+hazelnut,0.0084260333608835,Precomputed artifact

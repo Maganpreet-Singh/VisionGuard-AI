@@ -1,0 +1,6 @@
+Category,Model Loaded,Threshold Available,Test Samples Evaluated,Normal Samples,Defective Samples,Predicted Normal,Predicted Anomaly,Image Accuracy,Mean Score,Mean Threshold Ratio
+screw,True,True,100,41,59,68,32,0.19,0.02326682984828949,0.9386409787678118
+bottle,True,True,83,20,63,81,2,0.26506024096385544,0.10458561410027814,0.9725155068066174
+capsule,True,True,100,23,77,100,0,0.23,0.060360825099050996,0.9092945541011745
+metal_nut,True,True,100,22,78,100,0,0.22,0.01666669006459415,0.6324579506546395
+hazelnut,True,True,100,40,60,95,5,0.45,0.004851487479172647,0.5757735901800359

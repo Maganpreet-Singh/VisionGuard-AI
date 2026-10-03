@@ -1,0 +1,12 @@
+Category,Error_Type,Images
+bottle,Correct,22
+bottle,False Negative,61
+capsule,Correct,25
+capsule,False Negative,107
+hazelnut,Correct,49
+hazelnut,False Negative,61
+metal_nut,Correct,22
+metal_nut,False Negative,93
+screw,Correct,20
+screw,False Negative,113
+screw,False Positive,27

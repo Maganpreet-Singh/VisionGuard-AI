@@ -1,0 +1,16 @@
+Category,Split,Mode,Images
+bottle,ground_truth,L,63
+bottle,test,RGB,83
+bottle,train,RGB,209
+capsule,ground_truth,L,109
+capsule,test,RGB,132
+capsule,train,RGB,219
+hazelnut,ground_truth,L,70
+hazelnut,test,RGB,110
+hazelnut,train,RGB,391
+metal_nut,ground_truth,L,93
+metal_nut,test,RGB,115
+metal_nut,train,RGB,220
+screw,ground_truth,L,119
+screw,test,L,160
+screw,train,L,320

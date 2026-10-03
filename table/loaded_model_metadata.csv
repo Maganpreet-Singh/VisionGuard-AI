@@ -1,0 +1,6 @@
+Category,Layers,Parameters,Input Shape,Output Shape
+screw,21,778371,"(None, 128, 128, 3)","(None, 128, 128, 3)"
+bottle,21,778371,"(None, 128, 128, 3)","(None, 128, 128, 3)"
+capsule,21,778371,"(None, 128, 128, 3)","(None, 128, 128, 3)"
+metal_nut,21,778371,"(None, 128, 128, 3)","(None, 128, 128, 3)"
+hazelnut,21,778371,"(None, 128, 128, 3)","(None, 128, 128, 3)"

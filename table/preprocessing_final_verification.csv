@@ -1,0 +1,8 @@
+Check,Status
+All requested categories represented,True
+Training manifest contains images,True
+Test manifest contains images,True
+Train TensorFlow dataset created,True
+Validation TensorFlow dataset created,True
+Test TensorFlow dataset created,True
+Required tables exported,True

@@ -1,0 +1,3 @@
+Dataset,Batch Shape,Minimum Pixel Value,Maximum Pixel Value,Contains NaN,Contains Inf
+Train,"(32, 224, 224, 3)",0.0,1.0,False,False
+Validation,"(32, 224, 224, 3)",0.1135653257369995,1.0000003576278689,False,False

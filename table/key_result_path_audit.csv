@@ -1,0 +1,7 @@
+Table,Path Fields Found,No Path Fields
+image_level_anomaly_scores.csv,0,True
+category_anomaly_detection_metrics.csv,0,True
+anomaly_detection_results_snapshot.csv,0,True
+false_positive_cases.csv,0,True
+false_negative_cases.csv,0,True
+representative_cases.csv,0,True

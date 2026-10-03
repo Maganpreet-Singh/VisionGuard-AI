@@ -1,0 +1,59 @@
+Visualization,PNG,HTML
+dataset_components_by_category,False,True
+Defect Distribution Across Selected Categories,False,True
+defect_distribution_across_selected_categories,False,True
+Defective Test Image Share by Category,False,True
+Defective Test Samples and Ground-Truth Masks,True,False
+defective_images_ground_truth_and_overlay,True,False
+defective_test_image_share,False,True
+defective_test_image_share_by_category,False,True
+defective_test_samples_and_ground-truth_masks,True,False
+Final Dataset Image Counts by Category,False,True
+final_dataset_image_counts_by_category,False,True
+final_visionguard_ai_dataset_validation,False,True
+Good vs Defective Test Images,False,True
+good_vs_defective_test_images,False,True
+Ground-Truth Mask Distribution,False,True
+ground-truth_mask_distribution,False,True
+ground-truth_masks_by_category,False,True
+Image Aspect Ratio Distribution,False,True
+Image Color Mode Distribution,False,True
+Image File Format Distribution,False,True
+Image Height Distribution,False,True
+Image Width Distribution,False,True
+image_aspect_ratio_distribution,False,True
+image_color_mode_distribution,False,True
+image_dimensions_by_category,False,True
+image_file_extension_distribution,False,True
+image_file_format_distribution,False,True
+image_height_distribution,False,True
+image_width_distribution,False,True
+Mean Pixel Intensity by Category,False,True
+mean_pixel_intensity,False,True
+mean_pixel_intensity_by_category,False,True
+Minimum and Maximum Pixel Intensity,False,True
+minimum_and_maximum_pixel_intensities,False,True
+minimum_and_maximum_pixel_intensity,False,True
+MVTec AD Category Component Availability,False,True
+mvtec_ad_category_component_availability,False,True
+normal_and_defective_test_samples,True,False
+Pixel Intensity Variation by Category,False,True
+pixel_intensity_variation,False,True
+pixel_intensity_variation_by_category,False,True
+Prepared Dataset Size by Category,False,True
+prepared_dataset_size_by_category,False,True
+prepared_dataset_structure_validation,False,True
+Representative Normal and Defective Test Samples,True,False
+Representative Training Samples,True,False
+representative_normal_and_defective_test_samples,True,False
+representative_training_samples,True,False
+requested_mvtec_category_availability,False,True
+Sample Image Distribution by Category,False,True
+sample_image_distribution_by_category,False,True
+test_images_by_actual_mvtec_defect_directory,False,True
+test_images_by_category,False,True
+Train vs Test Composition,False,True
+train_vs_test_composition,False,True
+training_and_test_image_composition,False,True
+training_images_by_category,False,True
+training_samples,True,False

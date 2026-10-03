@@ -1,0 +1,7 @@
+Category,Train Images,Test Images,Sample Images,Ground Truth Masks,Size (GB)
+screw,320,160,480,119,0.1825
+bottle,209,83,292,63,0.1458
+capsule,219,132,351,109,0.377
+metal_nut,220,115,335,93,0.1545
+hazelnut,391,110,501,70,0.5752
+TOTAL,1359,600,1959,454,1.4349

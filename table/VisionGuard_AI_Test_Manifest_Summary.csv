@@ -1,0 +1,27 @@
+Category,Defect Type,Label,Images
+bottle,broken_large,1,20
+bottle,broken_small,1,22
+bottle,contamination,1,21
+bottle,good,0,20
+capsule,crack,1,23
+capsule,faulty_imprint,1,22
+capsule,good,0,23
+capsule,poke,1,21
+capsule,scratch,1,23
+capsule,squeeze,1,20
+hazelnut,crack,1,18
+hazelnut,cut,1,17
+hazelnut,good,0,40
+hazelnut,hole,1,18
+hazelnut,print,1,17
+metal_nut,bent,1,25
+metal_nut,color,1,22
+metal_nut,flip,1,23
+metal_nut,good,0,22
+metal_nut,scratch,1,23
+screw,good,0,41
+screw,manipulated_front,1,24
+screw,scratch_head,1,24
+screw,scratch_neck,1,25
+screw,thread_side,1,23
+screw,thread_top,1,23

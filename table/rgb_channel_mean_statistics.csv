@@ -1,0 +1,16 @@
+Category,Channel,Mean
+screw,Red,0.720687
+screw,Green,0.720687
+screw,Blue,0.720687
+bottle,Red,0.532565
+bottle,Green,0.52866
+bottle,Blue,0.54525
+capsule,Red,0.692508
+capsule,Green,0.662433
+capsule,Blue,0.651927
+metal_nut,Red,0.20475
+metal_nut,Green,0.22655
+metal_nut,Blue,0.231025
+hazelnut,Red,0.240175
+hazelnut,Green,0.178731
+hazelnut,Blue,0.174197

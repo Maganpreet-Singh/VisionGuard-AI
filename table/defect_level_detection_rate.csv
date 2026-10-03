@@ -1,0 +1,22 @@
+Category,Defect Type,Images,Defect Detection Rate
+bottle,broken_large,20,0.1
+bottle,broken_small,22,0.0
+bottle,contamination,21,0.0
+capsule,crack,23,0.0
+capsule,faulty_imprint,22,0.0
+capsule,poke,21,0.0
+capsule,scratch,23,0.0
+capsule,squeeze,20,0.1
+hazelnut,crack,18,0.1111111111111111
+hazelnut,cut,17,0.0
+hazelnut,hole,18,0.0
+hazelnut,print,17,0.4117647058823529
+metal_nut,bent,25,0.0
+metal_nut,color,22,0.0
+metal_nut,flip,23,0.0
+metal_nut,scratch,23,0.0
+screw,manipulated_front,24,0.20833333333333334
+screw,scratch_head,24,0.0
+screw,scratch_neck,25,0.0
+screw,thread_side,23,0.043478260869565216
+screw,thread_top,23,0.0

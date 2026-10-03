@@ -1,0 +1,11 @@
+Category,Class,Images
+bottle,Defective,63
+bottle,Normal,20
+capsule,Defective,109
+capsule,Normal,23
+hazelnut,Defective,70
+hazelnut,Normal,40
+metal_nut,Defective,93
+metal_nut,Normal,22
+screw,Defective,119
+screw,Normal,41

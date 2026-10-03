@@ -1,0 +1,6 @@
+Category,True Negatives,False Positives,False Negatives,True Positives
+bottle,20,0,61,2
+capsule,23,0,107,2
+hazelnut,40,0,61,9
+metal_nut,22,0,93,0
+screw,14,27,113,6

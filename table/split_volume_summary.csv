@@ -1,0 +1,16 @@
+Category,Split,Images
+bottle,Test,83
+bottle,Train,167
+bottle,Validation,42
+capsule,Test,132
+capsule,Train,175
+capsule,Validation,44
+hazelnut,Test,110
+hazelnut,Train,313
+hazelnut,Validation,78
+metal_nut,Test,115
+metal_nut,Train,176
+metal_nut,Validation,44
+screw,Test,160
+screw,Train,256
+screw,Validation,64

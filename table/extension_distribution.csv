@@ -1,0 +1,16 @@
+Category,Split,Extension,Images
+bottle,ground_truth,.png,63
+bottle,test,.png,83
+bottle,train,.png,209
+capsule,ground_truth,.png,109
+capsule,test,.png,132
+capsule,train,.png,219
+hazelnut,ground_truth,.png,70
+hazelnut,test,.png,110
+hazelnut,train,.png,391
+metal_nut,ground_truth,.png,93
+metal_nut,test,.png,115
+metal_nut,train,.png,220
+screw,ground_truth,.png,119
+screw,test,.png,160
+screw,train,.png,320

@@ -1,0 +1,16 @@
+Category,Split,Width,Height,Images,Share (%)
+bottle,ground_truth,900,900,63,100.0
+bottle,test,900,900,83,100.0
+bottle,train,900,900,209,100.0
+capsule,ground_truth,1000,1000,109,100.0
+capsule,test,1000,1000,132,100.0
+capsule,train,1000,1000,219,100.0
+hazelnut,ground_truth,1024,1024,70,100.0
+hazelnut,test,1024,1024,110,100.0
+hazelnut,train,1024,1024,391,100.0
+metal_nut,ground_truth,700,700,93,100.0
+metal_nut,test,700,700,115,100.0
+metal_nut,train,700,700,220,100.0
+screw,ground_truth,1024,1024,119,100.0
+screw,test,1024,1024,160,100.0
+screw,train,1024,1024,320,100.0

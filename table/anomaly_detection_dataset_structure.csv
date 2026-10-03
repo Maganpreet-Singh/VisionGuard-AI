@@ -1,0 +1,6 @@
+Category,Train Good,Test,Ground Truth,Normal Train Images,Test Images,Mask Images
+screw,True,True,True,320,160,119
+bottle,True,True,True,209,83,63
+capsule,True,True,True,219,132,109
+metal_nut,True,True,True,220,115,93
+hazelnut,True,True,True,391,110,70
